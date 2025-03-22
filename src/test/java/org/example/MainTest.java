@@ -39,4 +39,22 @@ public class MainTest {
         LocalTime localTime = LocalTime.parse(time);
         assertEquals(expected, Main.handle_ticket(age, localTime));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "-1, 12:00, Invalid Input",
+            "151, 12:00, Invalid Input",
+            "5, 08:00, 5% Discount",
+            "20, 12:00, 10% Discount",
+            "20, 23:30, Invalid Input",
+            "20, 06:00, Invalid Input",
+            "20, 10:00, No Discount",
+            "5, 10:00, 5% Discount",
+            "5, 14:00, 5% Discount",
+            "5, 12:00, 10% Discount"
+    })
+    void dfg_TestHandleTicket(int age, String time, String expected) {
+        LocalTime localTime = LocalTime.parse(time);
+        assertEquals(expected, Main.handle_ticket(age, localTime));
+    }
 }
